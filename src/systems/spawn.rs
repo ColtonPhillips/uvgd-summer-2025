@@ -11,15 +11,14 @@ pub fn spawn_bodies(
     mut meshes: ResMut<Assets<Mesh>>,
     mut materials: ResMut<Assets<ColorMaterial>>,
 ) {
-    // camera
-    // commands.spawn(Camera2d)
+    // Shouldn't be here
     commands.spawn((
         Camera2d::default(),
         Projection::from(OrthographicProjection {
             scaling_mode: bevy::render::camera::ScalingMode::FixedVertical {
                 viewport_height: (300.0),
             },
-            scale: 9.0,
+            scale: 7.0,
             ..OrthographicProjection::default_2d()
         }),
         Transform::from_xyz(0.0, 0.0, 10.0).looking_at(Vec3::ZERO, Vec3::Y),
@@ -27,10 +26,10 @@ pub fn spawn_bodies(
 
     let perlin = Perlin::new(42);
     let mesh = meshes.add(Rectangle::default());
-    let material = materials.add(Color::from(PURPLE));
+    let material = materials.add(Color::srgb(0.9, 0.7, 0.8));
 
-    let count_x = 20;
-    let count_y = 20;
+    let count_x = 30;
+    let count_y = 30;
     let spacing = 50.0;
     let center_offset = Vec2::new(
         -(count_x as f32 * spacing) / 2.0,
@@ -80,19 +79,25 @@ fn spawn_body(
     mesh: Handle<Mesh>,
     material: Handle<ColorMaterial>,
 ) {
-    let scale = 10.0;
+    let mut _scale = 10.0;
+    let mut _mass = 100.0;
+    // 1 in 10 chance to triple velocity
+    if rng().random_ratio(1, 100) {
+        _mass *= 1.3;
+        _scale *= 2.3;
+    }
 
     commands.spawn((
         Body {
             velocity,
-            mass: 100.0,
+            mass: _mass,
             radius: 1.0,
         },
         Mesh2d(mesh),
         MeshMaterial2d(material),
         Transform {
             translation: position.extend(0.0),
-            scale: Vec3::splat(scale),
+            scale: Vec3::splat(_scale),
             ..Default::default()
         },
         GlobalTransform::default(),

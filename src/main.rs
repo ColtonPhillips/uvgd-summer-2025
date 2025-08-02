@@ -19,6 +19,8 @@ fn main() {
             }),
             FpsOverlayPlugin::default(),
         ))
+        // set the global default clear color
+        .insert_resource(ClearColor(Color::srgb(0.1, 0.1, 0.2)))
         .add_plugins(SimulationPlugin)
         .run();
 }
