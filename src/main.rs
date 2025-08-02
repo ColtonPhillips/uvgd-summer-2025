@@ -1,11 +1,11 @@
-mod setup;
 mod components;
+mod setup;
+mod sim;
 mod systems;
 use bevy::prelude::*;
 use bevy_dev_tools::fps_overlay::FpsOverlayPlugin;
 
-use crate::setup::*;
-use crate::systems::debug::*;
+use sim::SimulationPlugin;
 
 fn main() {
     App::new()
@@ -17,15 +17,8 @@ fn main() {
                 }),
                 ..default()
             }),
-            FpsOverlayPlugin::default()
+            FpsOverlayPlugin::default(),
         ))
-        .add_systems(Startup, (hello_world, spawn_bodies))
-        //.add_systems(Update, (jiggle_bodies, log_bodies))
-        .add_systems(Update, (jiggle_bodies))
+        .add_plugins(SimulationPlugin)
         .run();
 }
-
-fn hello_world() {
-    info!("I am here");
-}
-

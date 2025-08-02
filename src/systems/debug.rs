@@ -1,6 +1,6 @@
+use crate::components::body::Body;
 use bevy::prelude::*;
 use rand::Rng;
-use crate::components::body::Body;
 
 pub fn log_bodies(query: Query<&Body>) {
     for body in query.iter() {
@@ -19,3 +19,6 @@ pub fn jiggle_bodies(mut query: Query<&mut Transform, With<Body>>) {
     }
 }
 
+pub fn hello_world() {
+    info!("I am here");
+}
