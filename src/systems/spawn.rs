@@ -16,9 +16,9 @@ pub fn spawn_bodies(
         Camera2d::default(),
         Projection::from(OrthographicProjection {
             scaling_mode: bevy::render::camera::ScalingMode::FixedVertical {
-                viewport_height: (300.0),
+                viewport_height: (720.0),
             },
-            scale: 7.0,
+            scale: 4.0,
             ..OrthographicProjection::default_2d()
         }),
         Transform::from_xyz(0.0, 0.0, 10.0).looking_at(Vec3::ZERO, Vec3::Y),
@@ -26,11 +26,12 @@ pub fn spawn_bodies(
 
     let perlin = Perlin::new(42);
     let mesh = meshes.add(Rectangle::default());
+
     let material = materials.add(Color::srgb(0.9, 0.7, 0.8));
 
-    let count_x = 30;
-    let count_y = 30;
-    let spacing = 50.0;
+    let count_x = 48;
+    let count_y = 48;
+    let spacing = 32.0;
     let center_offset = Vec2::new(
         -(count_x as f32 * spacing) / 2.0,
         -(count_y as f32 * spacing) / 2.0,

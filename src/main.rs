@@ -2,7 +2,7 @@ mod components;
 mod setup;
 mod sim;
 mod systems;
-use bevy::prelude::*;
+use bevy::{prelude::*, window::WindowMode};
 use bevy_dev_tools::fps_overlay::FpsOverlayPlugin;
 
 use sim::SimulationPlugin;
@@ -12,7 +12,8 @@ fn main() {
         .add_plugins((
             DefaultPlugins.set(WindowPlugin {
                 primary_window: Some(Window {
-                    present_mode: bevy::window::PresentMode::Immediate,
+                    resizable: false,
+                    mode: WindowMode::BorderlessFullscreen(MonitorSelection::Primary),
                     ..default()
                 }),
                 ..default()

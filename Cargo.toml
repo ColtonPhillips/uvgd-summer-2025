@@ -8,3 +8,22 @@ bevy = "0.16.1"
 bevy_dev_tools = "0.16.1"
 rand = "0.9.2"
 noise = "0.9.0"
+
+[profile.release]
+# Enable Link-Time Optimization (LTO) for whole-program optimization.
+# "thin" offers a good balance of optimization and compile times.
+# Setting to `true` provides the most aggressive optimization but significantly increases compile times.
+lto = "thin"
+
+# Set codegen units to 1 for maximum optimization potential by allowing the compiler 
+# to optimize the entire crate as a single unit. This also slows down compilation.
+codegen-units = 1
+
+# Optimize for speed (3) or size ("s" or "z"). "s" or "z" are especially useful for WASM.
+opt-level = 3
+
+# Disable incremental compilation for release builds, which is primarily for development.
+incremental = false
+
+# Strip debugging information from the binary to reduce file size.
+debug = false
