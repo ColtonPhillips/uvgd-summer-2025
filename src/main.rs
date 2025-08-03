@@ -1,6 +1,7 @@
 mod components;
 mod sim;
 mod systems;
+mod config;
 use bevy::{prelude::*, window::WindowMode};
 use bevy_dev_tools::fps_overlay::FpsOverlayPlugin;
 
@@ -9,9 +10,10 @@ use sim::SimulationPlugin;
 fn main() {
     App::new()
         .add_plugins((
-            DefaultPlugins.set(WindowPlugin {
+            DefaultPlugins
+            .set(WindowPlugin {
                 primary_window: Some(Window {
-                    resizable: false,
+                    resizable: true,
                     cursor_options: bevy::window::CursorOptions {
                         visible: false,
                         ..default()
@@ -20,7 +22,8 @@ fn main() {
                     ..default()
                 }),
                 ..default()
-            }),
+            })
+            .set(ImagePlugin::default_nearest()),
             FpsOverlayPlugin::default(),
         ))
         // set the global default clear color

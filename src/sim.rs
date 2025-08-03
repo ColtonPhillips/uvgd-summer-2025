@@ -1,21 +1,25 @@
-use crate::systems::camera::spawn_camera;
+use crate::systems::ghost_follow_camera::ghost_follow_camera;
+use crate::systems::spawn::spawn_bodies;
+use crate::systems::spawn_ghost::spawn_ghost;
+use crate::systems::camera::*;
+use crate::systems::cursor::*;
 use crate::systems::gravity::*;
 use crate::systems::keyboardcontrol::camera_movement;
 use crate::systems::mousecontrol::{mouse_motion, scroll_events};
-use crate::systems::spawn::spawn_bodies;
 use bevy::prelude::*;
 pub struct SimulationPlugin;
 
 impl Plugin for SimulationPlugin {
     fn build(&self, app: &mut App) {
-        app.add_systems(Startup, (spawn_bodies, spawn_camera))
-            // .add_systems(Update, jiggle_bodies)
+        app.add_systems(Startup, (grab_cursor_on_focus, spawn_bodies, spawn_camera, spawn_ghost))
             .add_systems(
                 FixedUpdate,
                 (
+                    grab_cursor_on_focus,
                     camera_movement,
                     mouse_motion,
                     scroll_events,
+                    ghost_follow_camera,
                     apply_gravity,
                     integrate,
                 ),

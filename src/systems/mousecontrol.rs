@@ -27,7 +27,10 @@ pub fn scroll_events(
             MouseScrollUnit::Pixel => {
                 for mut projection in &mut query {
                     if let Projection::Orthographic(ortho) = &mut *projection {
-                        ortho.scale += 0.25 * -event.y; // Zoom in
+                        ortho.scale += 0.2 * -event.y; // Zoom in
+                        if ortho.scale < 0.2 {
+                            ortho.scale = 0.2;
+                        }
                     }
                 }
             }

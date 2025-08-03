@@ -1,9 +1,9 @@
-// src/systems/spawn.rs
-
 use crate::components::body::Body;
-use bevy::prelude::*;
 use noise::{NoiseFn, Perlin};
 use rand::{Rng, rng};
+use crate::config::*;
+
+use bevy::prelude::*;
 
 pub fn spawn_bodies(
     mut commands: Commands,
@@ -15,8 +15,8 @@ pub fn spawn_bodies(
 
     let material = materials.add(Color::srgb(0.9, 0.7, 0.8));
 
-    let count_x = 48;
-    let count_y = 48;
+    let count_x = SPAWN_DENSITY;
+    let count_y = SPAWN_DENSITY - 2;
     let spacing = 32.0;
     let center_offset = Vec2::new(
         -(count_x as f32 * spacing) / 2.0,
@@ -66,25 +66,39 @@ fn spawn_body(
     mesh: Handle<Mesh>,
     material: Handle<ColorMaterial>,
 ) {
-    let mut _scale = 10.0;
-    let mut _mass = 100.0;
+
+    let mut radius: f32 = 2.0;
+    let mut density = 1.0;
     // 1 in 10 chance to triple velocity
     if rng().random_ratio(1, 100) {
-        _mass *= 1.3;
-        _scale *= 2.3;
+        radius *= 2.3;
     }
+    if rng().random_ratio(1, 10) {
+     density += 0.1;
+    }
+    if rng().random_ratio(1, 2) {
+        radius += 0.5;   
+    }
+    if rng().random_ratio(1, 5) {
+        radius *= 1.5;
+    }
+    if rng().random_ratio(1, 100) {
+        radius *= 0.5;
+    }
+
+    let mass = density * radius.powi(3); // volume ∝ radius³
 
     commands.spawn((
         Body {
             velocity,
-            mass: _mass,
-            radius: 1.0,
+            mass: mass,
+            radius: radius,
         },
         Mesh2d(mesh),
         MeshMaterial2d(material),
         Transform {
             translation: position.extend(0.0),
-            scale: Vec3::splat(_scale),
+            scale: Vec3::splat(radius * 2.0),
             ..Default::default()
         },
         GlobalTransform::default(),

@@ -4,3 +4,6 @@ pub mod gravity;
 pub mod keyboardcontrol;
 pub mod mousecontrol;
 pub mod spawn;
+pub mod spawn_ghost;
+pub mod ghost_follow_camera;
+pub mod cursor;
