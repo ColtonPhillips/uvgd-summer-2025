@@ -1,3 +1,4 @@
+pub mod camera;
 pub mod debug;
 pub mod gravity;
 pub mod keyboardcontrol;
