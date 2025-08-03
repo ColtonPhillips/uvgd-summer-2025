@@ -1,5 +1,4 @@
 mod components;
-mod setup;
 mod sim;
 mod systems;
 use bevy::{prelude::*, window::WindowMode};
@@ -13,6 +12,10 @@ fn main() {
             DefaultPlugins.set(WindowPlugin {
                 primary_window: Some(Window {
                     resizable: false,
+                    cursor_options: bevy::window::CursorOptions {
+                        visible: false,
+                        ..default()
+                    },
                     mode: WindowMode::BorderlessFullscreen(MonitorSelection::Primary),
                     ..default()
                 }),

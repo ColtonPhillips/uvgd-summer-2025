@@ -1,5 +1,4 @@
 pub mod debug;
 pub mod gravity;
-pub mod mousescroll;
+pub mod mousecontrol;
 pub mod spawn;
-pub mod zoom;

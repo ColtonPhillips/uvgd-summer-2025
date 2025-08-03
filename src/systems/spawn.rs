@@ -1,7 +1,6 @@
 // src/systems/spawn.rs
 
 use crate::components::body::Body;
-use bevy::color::palettes::basic::PURPLE;
 use bevy::prelude::*;
 use noise::{NoiseFn, Perlin};
 use rand::{Rng, rng};
