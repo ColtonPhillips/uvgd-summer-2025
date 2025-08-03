@@ -1,4 +1,5 @@
 use crate::systems::gravity::*;
+use crate::systems::keyboardcontrol::camera_movement;
 use crate::systems::mousecontrol::{mouse_motion, scroll_events};
 use crate::systems::spawn::spawn_bodies;
 use bevy::prelude::*;
@@ -10,7 +11,13 @@ impl Plugin for SimulationPlugin {
             // .add_systems(Update, jiggle_bodies)
             .add_systems(
                 FixedUpdate,
-                (mouse_motion, scroll_events, apply_gravity, integrate),
+                (
+                    camera_movement,
+                    mouse_motion,
+                    scroll_events,
+                    apply_gravity,
+                    integrate,
+                ),
             );
     }
 }
