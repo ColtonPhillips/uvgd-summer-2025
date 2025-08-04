@@ -7,3 +7,7 @@ pub mod spawn;
 pub mod spawn_ghost;
 pub mod ghost_follow_camera;
 pub mod cursor;
+pub mod spawn_sun;
+pub mod sun_behavior;
+pub mod spawn_moon;
+pub mod moon_behavior;

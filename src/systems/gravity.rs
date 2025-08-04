@@ -5,7 +5,8 @@ use bevy::prelude::*;
 fn gravitational_force(a: &Transform, am: f32, b: &Transform, bm: f32) -> Vec2 {
     // const G: f32 = 1000.0;
     // const G: f32 = 25.0;
-    const G: f32 = 225.0;
+    // const G: f32 = 225.0;
+    const G: f32 = 425.0;
     let pos_a = a.translation.truncate();
     let pos_b = b.translation.truncate();
     let dir = pos_b - pos_a;

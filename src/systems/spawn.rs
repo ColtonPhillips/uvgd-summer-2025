@@ -17,7 +17,7 @@ pub fn spawn_bodies(
 
     let count_x = SPAWN_DENSITY;
     let count_y = SPAWN_DENSITY - 2;
-    let spacing = 32.0;
+    let spacing = 64.0;
     let center_offset = Vec2::new(
         -(count_x as f32 * spacing) / 2.0,
         -(count_y as f32 * spacing) / 2.0,

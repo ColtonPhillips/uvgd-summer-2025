@@ -16,7 +16,7 @@ pub fn ghost_follow_camera(
     let dir_2d = Vec2::new(dir.x, dir.y); // ignore Z
 
     if dir_2d.length_squared() > 1.0 {
-        let speed = 2.0;
+        let speed = 9.0;
         body.velocity += dir_2d.normalize() * speed * dt;
     } else {
         // Optionally slow down or stop
